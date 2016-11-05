@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,12 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by subhankar on 11/6/2016.
@@ -23,15 +30,11 @@ public class CategoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private CategoryAdapter adapter;
     private List<Category> categoryList;
+    private SessionManager session;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        session = new SessionManager(getContext());
-
-//        feedActivity = (FeedActivity) getActivity();
-//        loadDataFromApi();
     }
 
     @Override
@@ -41,67 +44,9 @@ public class CategoryFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
 
         categoryList = new ArrayList<>();
-        adapter = new CategoryAdapter(getActivity(), categoryList);
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-
-        prepareAlbums();
+        loadDataFromApi();
 
         return view;
-    }
-
-    /**
-     * Adding few albums for testing
-     */
-    private void prepareAlbums() {
-        int[] covers = new int[]{
-                R.drawable.album1,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10,
-                R.drawable.album11};
-
-        Category a = new Category("True Romance", 13, covers[0]);
-        categoryList.add(a);
-
-        a = new Category("Xscpae", 8, covers[1]);
-        categoryList.add(a);
-
-        a = new Category("Maroon 5", 11, covers[2]);
-        categoryList.add(a);
-
-        a = new Category("Born to Die", 12, covers[3]);
-        categoryList.add(a);
-
-        a = new Category("Honeymoon", 14, covers[4]);
-        categoryList.add(a);
-
-        a = new Category("I Need a Doctor", 1, covers[5]);
-        categoryList.add(a);
-
-        a = new Category("Loud", 11, covers[6]);
-        categoryList.add(a);
-
-        a = new Category("Legend", 14, covers[7]);
-        categoryList.add(a);
-
-        a = new Category("Hello", 11, covers[8]);
-        categoryList.add(a);
-
-        a = new Category("Greatest Hits", 17, covers[9]);
-        categoryList.add(a);
-
-        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -148,5 +93,47 @@ public class CategoryFragment extends Fragment {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    public void loadDataFromApi() {
+
+        session = new SessionManager(getActivity());
+
+        String userId = session.getId();
+
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+
+        Call<List<Category>> call = apiService.getUserCategories(userId);
+        call.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+
+                if (!response.body().isEmpty()) {
+                    categoryList.removeAll(categoryList);
+                    categoryList.addAll(response.body());
+
+                    adapter = new CategoryAdapter(getActivity(), categoryList);
+
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(adapter);
+                    Log.d(TAG, categoryList.toString());
+
+                }
+                else {
+                    Log.d(TAG, "fail");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                // Log error here since request failed
+                Log.e(TAG, t.toString());
+            }
+        });
+
     }
 }

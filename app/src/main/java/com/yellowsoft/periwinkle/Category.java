@@ -16,12 +16,28 @@ public class Category {
     @SerializedName("numofItems")
     private int numOfItems;
     @SerializedName("thumbnail")
-    private int thumbnail;
+    private String thumbnail;
 
-    public Category(String name, int numOfItems, int thumbnail) {
+    public Category(String name, int numOfItems, String thumbnail) {
         this.name = name;
         this.numOfItems = numOfItems;
         this.thumbnail = thumbnail;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getNumOfItems() {
@@ -40,11 +56,11 @@ public class Category {
         this.name = name;
     }
 
-    public int getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(int thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 }

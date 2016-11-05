@@ -75,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Launch upload activity
                 Intent intent = new Intent(ProfileActivity.this,
-                        UploadActivity.class);
+                        CreateCategory.class);
                 startActivity(intent);
                 finish();
             }

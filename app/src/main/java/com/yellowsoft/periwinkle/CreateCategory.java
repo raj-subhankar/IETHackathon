@@ -150,7 +150,7 @@ public class CreateCategory extends AppCompatActivity {
 
 
         // finally, execute the request
-        Call<ResponseBody> call = service.upload(user, body, postBody);
+        Call<ResponseBody> call = service.createCategory(user, body, postBody);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call,
