@@ -5,6 +5,7 @@ package com.yellowsoft.periwinkle;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder>{
 
     private Context mContext;
     private List<Category> categoryList;
@@ -28,13 +29,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, count;
         public ImageView thumbnail, overflow;
+        public View card;
 
         public MyViewHolder(View view) {
             super(view);
+
             title = (TextView) view.findViewById(R.id.title);
             count = (TextView) view.findViewById(R.id.count);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
+            card = (View) view.findViewById(R.id.card_view);
         }
     }
 
@@ -54,7 +58,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Category category = categoryList.get(position);
+        final Category category = categoryList.get(position);
         holder.title.setText(category.getName());
         holder.count.setText(category.getNumOfItems() + " tasks");
 
@@ -65,6 +69,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             @Override
             public void onClick(View view) {
 //                showPopupMenu(holder.overflow);
+            }
+        });
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MyViewHolder holder = (MyViewHolder) view.getTag();
+                Intent intent = new Intent(mContext,
+                        CategoryDetailActivity.class);
+                intent.putExtra("thumbnail", category.getThumbnail());
+                intent.putExtra("categoryid", category.getId());
+                mContext.startActivity(intent);
+//            finish();
             }
         });
     }

@@ -43,7 +43,8 @@ public interface ApiInterface {
     @POST("posts/add")
     Call<ResponseBody> upload(@Part("user") RequestBody name,
                               @Part MultipartBody.Part file,
-                              @Part("postBody") RequestBody postBody);
+                              @Part("postBody") RequestBody postBody,
+                              @Part("category") RequestBody category);
 
     @GET("posts/all")
     Call<List<Post>> getNewposts();
@@ -67,5 +68,8 @@ public interface ApiInterface {
 
     @GET("categories/all/{userid}")
     Call<List<Category>> getUserCategories(@Path("userid") String userId);
+
+    @GET("posts/all/category/{categoryid}")
+    Call<List<Post>> getPostsByCategories(@Path("categoryid") String categoryId);
 }
 

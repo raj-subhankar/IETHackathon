@@ -38,12 +38,15 @@ public class UploadActivity extends AppCompatActivity {
     private Uri photoUri;
     private ProgressDialog pDialog;
     private SessionManager session;
+    String categoryId;
 
     public final static int PICK_PHOTO_CODE = 1046;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        categoryId = getIntent().getStringExtra("categoryid");
 
         final Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -140,6 +143,10 @@ public class UploadActivity extends AppCompatActivity {
                 RequestBody.create(
                         MediaType.parse("multipart/form-data"), userId);
 
+        RequestBody category =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), categoryId);
+
         // add another part within the multipart request
         EditText desc = (EditText) findViewById(R.id.etDescription);
         String bodyText = desc.getText().toString();
@@ -156,7 +163,7 @@ public class UploadActivity extends AppCompatActivity {
 
 
         // finally, execute the request
-        Call<ResponseBody> call = service.upload(user, body, postBody);
+        Call<ResponseBody> call = service.upload(user, body, postBody, category);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call,

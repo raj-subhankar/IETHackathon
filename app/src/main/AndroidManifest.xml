@@ -47,6 +47,12 @@
             android:label="Upload"
             android:theme="@style/MyMaterialTheme"/>
 
+        <activity
+            android:name=".CategoryDetailActivity"
+            android:screenOrientation="portrait"
+            android:label="Upload"
+            android:theme="@style/MyMaterialTheme"/>
+
         <!--<activity-->
             <!--android:name=".ProfileActivity"-->
             <!--android:screenOrientation="portrait"-->
