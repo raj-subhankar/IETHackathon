@@ -32,5 +32,11 @@ public interface ApiInterface {
     @POST("users/add")
     Call<AuthResult> register(@Field("email") String email,
                               @Field("password") String password);
+
+    @Multipart
+    @PUT("users/{id}")
+    Call<AuthResult> createProfile(@Path("id") String id,
+                                   @Part("name") RequestBody name,
+                                   @Part MultipartBody.Part file);
 }
 
