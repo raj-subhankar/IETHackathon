@@ -58,5 +58,11 @@ public interface ApiInterface {
 
     @GET("posts/all/{userid}")
     Call<List<Post>> getUserPosts(@Path("userid") String userId);
+
+    @Multipart
+    @POST("categories/add")
+    Call<ResponseBody> createCategory(@Part("user") RequestBody name,
+                              @Part MultipartBody.Part file,
+                              @Part("name") RequestBody postBody);
 }
 
