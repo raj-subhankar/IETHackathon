@@ -38,5 +38,22 @@ public interface ApiInterface {
     Call<AuthResult> createProfile(@Path("id") String id,
                                    @Part("name") RequestBody name,
                                    @Part MultipartBody.Part file);
+
+    @Multipart
+    @POST("posts/add")
+    Call<ResponseBody> upload(@Part("user") RequestBody name,
+                              @Part MultipartBody.Part file,
+                              @Part("postBody") RequestBody postBody);
+
+    @GET("posts/all")
+    Call<List<Post>> getNewposts();
+
+    @GET("posts/all")
+    Call<List<Post>> getMoreNewposts(@Query("lastid") String id);
+
+    @FormUrlEncoded
+    @POST("posts/like")
+    Call<Result> like(@Field("post_id") String id,
+                      @Field("userId") String user);
 }
 

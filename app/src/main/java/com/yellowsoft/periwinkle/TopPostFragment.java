@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewPostFragment extends Fragment {
+public class TopPostFragment extends Fragment {
     private SessionManager session;
     ArrayList<Post> posts = new ArrayList<Post>();
     private RecyclerView recyclerView;
@@ -31,7 +31,7 @@ public class NewPostFragment extends Fragment {
 
     private static final String TAG = NewPostFragment.class.getSimpleName();
 
-    public NewPostFragment() {
+    public TopPostFragment() {
     }
 
     public FeedActivity feedActivity;

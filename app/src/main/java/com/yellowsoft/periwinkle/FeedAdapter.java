@@ -18,9 +18,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
-import com.yellowsoft.yellow.model.pojo.Post2;
-import com.yellowsoft.yellow.model.pojo.Result;
-import com.yellowsoft.yellow.ui.activities.FeedActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -35,6 +35,12 @@
             android:label="Feed"
             android:theme="@style/MyMaterialTheme"/>
 
+        <activity
+            android:name=".UploadActivity"
+            android:screenOrientation="portrait"
+            android:label="Upload"
+            android:theme="@style/MyMaterialTheme"/>
+
     </application>
 
 </manifest>

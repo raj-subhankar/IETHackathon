@@ -70,10 +70,10 @@ public class FeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Launch upload activity
-//                Intent intent = new Intent(FeedActivity.this,
-//                        UploadActivity.class);
-//                startActivity(intent);
-//                finish();
+                Intent intent = new Intent(FeedActivity.this,
+                        UploadActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -100,8 +100,8 @@ public class FeedActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NewFeedActivityFragment(), "NEW");
-        adapter.addFragment(new TopFeedActivityFragment(), "TOP");
+        adapter.addFragment(new NewPostFragment(), "NEW");
+        adapter.addFragment(new TopPostFragment(), "TOP");
         viewPager.setAdapter(adapter);
     }
 
