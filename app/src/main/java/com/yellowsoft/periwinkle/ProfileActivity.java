@@ -44,9 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(linearLayoutManager);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -81,30 +81,30 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
-
-        Call<List<Post>> call = apiService.getUserPosts(id);
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-
-                if (!response.body().isEmpty()) {
-                    posts.removeAll(posts);
-                    posts.addAll(response.body());
-                    mAdapter = new FeedAdapter(getApplicationContext(), posts);
-                    mAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(mAdapter);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                // Log error here since request failed
-//                Log.e(TAG, t.toString());
-            }
-        });
+//        ApiInterface apiService =
+//                ApiClient.getClient().create(ApiInterface.class);
+//
+//        Call<List<Post>> call = apiService.getUserPosts(id);
+//        call.enqueue(new Callback<List<Post>>() {
+//            @Override
+//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+//
+//                if (!response.body().isEmpty()) {
+//                    posts.removeAll(posts);
+//                    posts.addAll(response.body());
+//                    mAdapter = new FeedAdapter(getApplicationContext(), posts);
+//                    mAdapter.notifyDataSetChanged();
+//                    recyclerView.setAdapter(mAdapter);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Post>> call, Throwable t) {
+//                // Log error here since request failed
+////                Log.e(TAG, t.toString());
+//            }
+//        });
     }
 
     private void setupTabIcons() {
@@ -116,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TestFragment(), "NEW");
+        adapter.addFragment(new CategoryFragment(), "NEW");
         adapter.addFragment(new TestFragment(), "TOP");
         adapter.addFragment(new TestFragment(), "NEW");
         adapter.addFragment(new TestFragment(), "TOP");
