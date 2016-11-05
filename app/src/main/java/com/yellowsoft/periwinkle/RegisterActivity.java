@@ -37,10 +37,10 @@ public class RegisterActivity extends Activity {
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-//            Intent intent = new Intent(RegisterActivity.this,
-//                    FeedActivity.class);
-//            startActivity(intent);
-//            finish();
+            Intent intent = new Intent(RegisterActivity.this,
+                    FeedActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         etEmail = (EditText) findViewById(R.id.etEmail);
@@ -112,11 +112,11 @@ public class RegisterActivity extends Activity {
 //                    db.addUser(name, email, uid, created_at);
 
                     // Launch feed activity
-//                    Intent intent = new Intent(RegisterActivity.this,
-//                            FeedActivity.class);
-//                    intent.putExtra("userid", id);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(RegisterActivity.this,
+                            CreateProfileActivity.class);
+                    intent.putExtra("userid", id);
+                    startActivity(intent);
+                    finish();
                 } else {
                     //Error in login. Get the error message
                     String errorMsg = result.getMessage().toString();

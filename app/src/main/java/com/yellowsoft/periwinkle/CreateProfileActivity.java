@@ -180,9 +180,9 @@ public class CreateProfileActivity extends Activity {
                             errorMsg, Toast.LENGTH_LONG).show();
                 }
                 pDialog.dismiss();
-//                Intent intent = new Intent(CreateProfileActivity.this, FeedActivity.class);
-//                startActivity(intent);
-//                finish();
+                Intent intent = new Intent(CreateProfileActivity.this, FeedActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override
