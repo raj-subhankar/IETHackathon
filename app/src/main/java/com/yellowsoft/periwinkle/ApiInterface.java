@@ -27,5 +27,10 @@ public interface ApiInterface {
     @POST("authenticate")
     Call<AuthResult> authenticate(@Field("name") String name,
                                   @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("users/add")
+    Call<AuthResult> register(@Field("email") String email,
+                              @Field("password") String password);
 }
 
