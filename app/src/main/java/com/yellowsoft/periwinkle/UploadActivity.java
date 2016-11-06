@@ -172,7 +172,7 @@ public class UploadActivity extends AppCompatActivity {
                                    Response<ResponseBody> response) {
                 Log.v("Upload", "success");
                 hideDialog();
-                Intent intent = new Intent(UploadActivity.this, FeedActivity.class);
+                Intent intent = new Intent(UploadActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }

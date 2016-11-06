@@ -73,7 +73,7 @@ public class NewPostFragment extends Fragment {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
                 int curSize = mAdapter.getItemCount();
-                customLoadMoreDataFromApi(posts.get(curSize - 1).getId().toString());
+//                customLoadMoreDataFromApi(posts.get(curSize - 1).getId().toString());
             }
         });
 

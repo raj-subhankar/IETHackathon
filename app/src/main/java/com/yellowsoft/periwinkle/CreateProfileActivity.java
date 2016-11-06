@@ -181,7 +181,7 @@ public class CreateProfileActivity extends Activity {
                             errorMsg, Toast.LENGTH_LONG).show();
                 }
                 pDialog.dismiss();
-                Intent intent = new Intent(CreateProfileActivity.this, FeedActivity.class);
+                Intent intent = new Intent(CreateProfileActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }

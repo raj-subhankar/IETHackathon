@@ -162,7 +162,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, "http://hostellife.co/view.php?pi=3");
-            context.startActivity(Intent.createChooser(shareIntent, "Share link using"));
+            view.getContext().startActivity(Intent.createChooser(shareIntent, "Share link using"));
         }
     }
 
