@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -32,8 +33,17 @@ public class CategoryDetailActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_category_detail);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         String thumbnail = getIntent().getStringExtra("thumbnail");
         final String categoryid = getIntent().getStringExtra("categoryid");
+        String title = getIntent().getStringExtra("title");
+
+        if (toolbar != null) {
+            toolbar.setTitle(title);
+            setSupportActionBar(toolbar);
+        }
 
         ImageView image = (ImageView) findViewById(R.id.image);
         Picasso.with(this).load(thumbnail).into(image);

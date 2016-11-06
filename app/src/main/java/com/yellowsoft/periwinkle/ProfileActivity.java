@@ -11,12 +11,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,12 @@ public class ProfileActivity extends AppCompatActivity {
 //        recyclerView = (RecyclerView) findViewById(R.id.recycler);
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 //        recyclerView.setLayoutManager(linearLayoutManager);
-
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        if (toolbar != null) {
+//            setSupportActionBar(toolbar);
+//        }
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        TextView toolbarText = (TextView) findViewById(R.id.toolbarText);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tlUserProfileTabs);
@@ -110,15 +118,15 @@ public class ProfileActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_grid_on_white);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_list_white);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_place_white);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_label_white);
+//        tabLayout.getTabAt(2).setIcon(R.drawable.ic_place_white);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_label_white);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CategoryFragment(), "NEW");
-        adapter.addFragment(new TestFragment(), "TOP");
-        adapter.addFragment(new TestFragment(), "NEW");
+        adapter.addFragment(new NewPostFragment(), "TOP");
+//        adapter.addFragment(new UserPostFragment(), "NEW");
         adapter.addFragment(new TestFragment(), "TOP");
         viewPager.setAdapter(adapter);
     }

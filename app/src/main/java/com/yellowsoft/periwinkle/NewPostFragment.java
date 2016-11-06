@@ -34,7 +34,7 @@ public class NewPostFragment extends Fragment {
     public NewPostFragment() {
     }
 
-    public FeedActivity feedActivity;
+    //public FeedActivity feedActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class NewPostFragment extends Fragment {
 
         session = new SessionManager(getContext());
 
-        feedActivity = (FeedActivity) getActivity();
+        //feedActivity = (FeedActivity) getActivity();
         loadDataFromApi();
     }
 

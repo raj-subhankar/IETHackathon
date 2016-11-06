@@ -29,7 +29,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, count;
         public ImageView thumbnail, overflow;
-        public View card;
+        public View root;
 
         public MyViewHolder(View view) {
             super(view);
@@ -38,7 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             count = (TextView) view.findViewById(R.id.count);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
-            card = (View) view.findViewById(R.id.card_view);
+            root = (View) view.findViewById(R.id.root);
         }
     }
 
@@ -72,7 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             }
         });
 
-        holder.card.setOnClickListener(new View.OnClickListener() {
+        holder.root.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -81,6 +81,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
                         CategoryDetailActivity.class);
                 intent.putExtra("thumbnail", category.getThumbnail());
                 intent.putExtra("categoryid", category.getId());
+                intent.putExtra("title", category.getName());
                 mContext.startActivity(intent);
 //            finish();
             }

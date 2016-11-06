@@ -46,7 +46,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView userName, userName2, body;
         public ImageView imageFeedItem, ivUserProfilePic;
-        public ImageButton btnLike;
+        public ImageButton btnLike, btnShare;
         public TextSwitcher likesCounter;
         public LinearLayout postBody;
 
@@ -57,6 +57,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
             body = (TextView) view.findViewById(R.id.text_body);
             imageFeedItem = (ImageView) view.findViewById(R.id.ivFeedCenter);
             btnLike = (ImageButton) view.findViewById(R.id.btnLike);
+            btnShare = (ImageButton) view.findViewById(R.id.btnShare);
             likesCounter = (TextSwitcher) view.findViewById(R.id.tsLikesCounter);
             ivUserProfilePic = (ImageView) view.findViewById(R.id.ivUserProfilePic);
             postBody = (LinearLayout) view.findViewById(R.id.postBody);
@@ -70,6 +71,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
 //        MyViewHolder.btnLike.setOnClickListener(this);
         MyViewHolder myViewHolder = new MyViewHolder(itemView);
         myViewHolder.btnLike.setOnClickListener(this);
+        myViewHolder.btnShare.setOnClickListener(this);
         myViewHolder.userName.setOnClickListener(this);
         myViewHolder.likesCounter.setOnClickListener(this);
 
@@ -113,6 +115,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         holder.likesCounter.setTag(holder);
         likesCount.put(position, post.getLikesCount());
         holder.btnLike.setTag(holder);
+        holder.btnShare.setTag(holder);
         if(post.getLikes().contains(userid)) {
             //likedPositions.add(holder.getAdapterPosition());
             updateHeartButton(holder, true);
@@ -155,18 +158,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
             }
             notifyItemChanged(position);
         }
-//        if(viewId == R.id.text_user_name) {
-//            Intent i = new Intent(context,
-//                    UserProfileActivity.class);
-//            i.putExtra("username", ArrayListPosts.get(position).getUserName());
-//            i.putExtra("team", ArrayListPosts.get(position).getTeam());
-//            context.startActivity(i);
-//        }
-//        if(viewId == R.id.tsLikesCounter) {
-//            Intent i = new Intent(context, LikersActivity.class);
-//            i.putExtra("likers", ArrayListPosts.get(position).getLikes());
-//            context.startActivity(i);
-//        }
+        else if(viewId == R.id.btnShare) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "http://hostellife.co/view.php?pi=3");
+            context.startActivity(Intent.createChooser(shareIntent, "Share link using"));
+        }
     }
 
     private void increaseLikesCounter(MyViewHolder holder, boolean animated) {

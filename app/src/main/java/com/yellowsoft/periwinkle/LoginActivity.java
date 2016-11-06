@@ -51,9 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-//            Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
-//            startActivity(intent);
-//            finish();
+            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         // Login button Click Event
@@ -122,10 +122,10 @@ public class LoginActivity extends AppCompatActivity {
                     // TBD store the user in SQLite
 
                     // Launch feed activity
-//                    Intent intent = new Intent(LoginActivity.this,
-//                            FeedActivity.class);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(LoginActivity.this,
+                            ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     // Error in login. Get the error message
                     String errorMsg = result.getMessage().toString();
